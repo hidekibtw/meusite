@@ -1,0 +1,36 @@
+1 passo - Acessar configuração de rede do windows server, e abrir a centrar de rede e compartilhamento
+2 passo - Acessar "Alterar as configurações do adaptador"
+3 passo - ir nas propriedades do seu NICTEAM
+4 passo - desabilitar protocolo TCP/IP Versão 6
+5 passo - selecionar protocolo TCP/IP Versão 4 e ir nas propriedades
+6 passo - colocar no Gateway padrão seu id: 172.16.x.254
+7 passo - trocar o ID no Servidor DNS preferencial para o seu próprio id: 172.16.x.10
+8 passo - Abrir as configurações do DNS
+9 passo - seleciona o seu servidor com o botão direito, e abre as propriedades.
+10 passo - selecionar em Interfaces "Apenas nos seguintes  endereçoes IP:"
+11 passo - em Encaminhadores clique em editar, e exclui tudo q tiver dentro.
+12 passo - clique em Zonas de Pesquisa inversa e clique com o botão direito nela, e selecione Nova Zona:
+    (X) Identificação de rede: 172.16.x.
+13 passo - Botão direito na tela da Zonas de pesquisa inversa e seleciona Novo Ponteiro, Clique em SRV - zonas de pesquisa direta - hideki.intra - srvhideki
+14 passo - conferir ipconfig /flushdns e dps nslookup e conferir as duas ultimas linhas
+15 passo - no PowerShell para confirmas se esta certo nslookup srvhideki.hideki.intra, srvhideki, 172.16.16.10
+16 passo - abrir o DHCP e selecionar Opções do escopo e clicar com botão direito em Configurar Opções
+17 passo - Selecione 044 - servidores WINS/NBNS coloque o seu ID: 172.16.16.10
+18 passo - Selecione 046 - Tipo de Nó WINS/NBT e coloque 0x8
+19 passo - No cliente do Windows 10, abra o PowerShell e coloque - ipconfig /release e ip config /renew
+20 passo - Criar na VM a maquina de Firewall:
+  TIPO: BSD
+  VERSÃO: FREEBSD-64BIT
+  TAMANHO MEMÓRIA: 2048MB
+  HD: 16GB
+  
+  Configurações:
+  SISTEMAS: Processador: 2CPU
+            selecionar as 2 caixinha abaixo
+  MONITOR: MEMÓRIA DE VIDEO: 128
+           (X) HABILITAR ACELERAÇÃO 3D
+  AUDIO: DESABILITAR
+  REDE: ADAPTADOR 1: MODO BRIDGE
+        ADAPTADOR 2: REDE INTERNA
+  
+  
